@@ -1,0 +1,11 @@
+# Jupyter Notebook
+**/.ipynb_checkpoints
+
+# exclude virtual envs
+.venv
+venv/
+ENV/
+*venv*
+
+# Big datasets
+data/
