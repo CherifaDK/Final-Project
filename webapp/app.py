@@ -7,7 +7,9 @@ from pydantic import BaseModel, Field, PositiveFloat
 app = Flask(__name__)
 MODEL = pickle.load(open("modelrfr.pkl", "rb"))
 
-@app.route('/', methods=['GET'])
+@app.route("/", methods=["GET"])
+def solarenergy_index():
+    return render_template("index.html")
 
 class FormQuery(BaseModel):
     angle_of_incidence: float = Field(..., validation_alias="angle_of_incidence")
@@ -19,12 +21,6 @@ class FormQuery(BaseModel):
     mean_sea_level_pressure_MSL: float = Field(..., validation_alias="mean_sea_level_pressure_MSL")
     wind_gust_10_m_above_gnd: float = Field(..., validation_alias="wind_gust_10_m_above_gnd")
     temperature_2_m_above_gnd: float = Field(..., validation_alias="temperature_2_m_above_gnd")
-
-
-@app.route("/", methods=["GET"])
-def solarenergy_index():
-    return render_template("index.html")
-
 
 @app.route("/predict/", methods=["POST"])
 def local_model_result():
